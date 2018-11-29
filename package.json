@@ -1,0 +1,19 @@
+{
+  "name": "lilyanneintegration",
+  "version": "0.1.0",
+  "description": "A simple integration server for Lily Anne Jewellery.",
+  "main": "server.js",
+  "dependencies": {
+    "xml2js": "^0.4.19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeahgoodcreative/lilyanneintegration.git"
+  },
+  "author": "Yeah Good Creative",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/yeahgoodcreative/lilyanneintegration/issues"
+  },
+  "homepage": "https://github.com/yeahgoodcreative/lilyanneintegration#readme"
+}
