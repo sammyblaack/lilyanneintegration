@@ -9,11 +9,12 @@
 // Modules
 var byDesign = require('./modules/bydesign')
 
+// Functions
 var promise = byDesign.getOrderListRecent('', 'week', 1, 'false')
 
 promise.then(function(result) {
     console.log(result)
 },
-function(reject) {
-
+function (reject) {
+    console.log(reject)
 })

@@ -18,6 +18,7 @@ module.exports = function (apiPath, dataPromise) {
     // Get promise result
     var promise = new Promise(function (resolve, reject) {
         dataPromise.then(function(data) {
+
             // Request options
             var options = {
                 hostname: config.hostname,
@@ -29,8 +30,6 @@ module.exports = function (apiPath, dataPromise) {
                     'Content-Length': data.length
                 }
             }
-
-            console.log(options)
 
             // Create request
             var req = https.request(options, function(res) {
@@ -49,7 +48,7 @@ module.exports = function (apiPath, dataPromise) {
                     // Convert body buffer to string
                     var xmlString = bodyBuffer.toString()
 
-                    console.log(bodyBuffer)
+                    //console.log(bodyBuffer)
 
                     // Parse xml string
                     var xml = xmlParser(xmlString, function (err, res) {
