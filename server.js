@@ -9,12 +9,35 @@
 // Modules
 var byDesign = require('./modules/bydesign')
 
-// Functions
-var promise = byDesign.getOrderListRecent('', 'week', 1, 'false')
 
-promise.then(function(result) {
-    console.log(result)
-},
-function (reject) {
-    console.log(reject)
-})
+// var promise1 = byDesign.getOrderListRecent('', 'week', 1, 'false')
+
+// // Get order list recent data from promise
+// promise1.then(function(result) {
+//     console.log(result)
+// },
+// function (reject) {
+//     console.log(reject)
+// })
+
+
+// // Get order info data from promise
+// var promise2 = byDesign.getOrderInfoV2('', '144144')
+
+// promise2.then(function(result) {
+//     console.log(result)
+// },
+// function (reject) {
+//     console.log(reject)
+// })
+
+
+// // Get order details info data from promise
+// var promise3 = byDesign.getOrderDetailsInfoV2('', '144144')
+
+// promise3.then(function(result) {
+//     console.log(result)
+// },
+// function (reject) {
+//     console.log(reject)
+// })
