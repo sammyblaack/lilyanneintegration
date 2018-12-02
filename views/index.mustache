@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Integration</title>
+
+        <style>
+            * {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            html, body {
+                width: 100%;
+                height: 100%;
+            }
+
+            .order {
+                width: 100%;
+                height: 30px;
+
+                display: block;
+
+                background-color: lightgray;
+                border-bottom: 1px solid black;
+            }
+
+            .order .order_info {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        {{#orders}}
+            <div class="order">
+                <table>
+                    <tr>
+                        <td>Order ID: {{orderId}}</td>
+                        <td>Date Created: {{dateCreated}}</td>
+                        <td>Date Modified: {{dateModified}}</td>
+                    </tr>
+                </table>
+
+                <div class="order_info"></div>
+            </div>
+        {{/orders}}
+    </body>
+</html>
