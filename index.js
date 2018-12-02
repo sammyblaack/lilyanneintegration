@@ -1,5 +1,6 @@
 const XeroClient = require('xero-node').AccountingAPIClient;
 
+// Config Stuff for authenticating with Xero Account
 const config = {
     "appType" : "private",
     "consumerKey": "K1NA1PB857ZP0FNUAN6HI8OR2VLCWH",
@@ -7,6 +8,7 @@ const config = {
     "privateKeyPath": "privatekey.pem"
   };
 
+// Function to create invoice in Xero
   (async function(){
     let xero = new XeroClient(config);
 
@@ -26,4 +28,12 @@ const config = {
   ],
   "Status": "AUTHORISED"     
     })
+
+// Function to create new customer  
+    await xero.contacts.create({
+      "Name": "Phillip"
+
+    })
+
+
   })();
