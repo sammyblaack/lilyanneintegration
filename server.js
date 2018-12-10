@@ -8,122 +8,127 @@
 // Modules
 var byDesign = require('./modules/bydesign')
 
-// DEBUG FUNCTION
-function getOrders() {
-    // Get orders from response
-    byDesign.getOrderListRecent('', 'week', 1, 'false', function(ordersListRecent) {
-        ordersListRecent = ordersListRecent['soap:Envelope']['soap:Body'][0]['GetOrderListRecentResponse'][0]['GetOrderListRecentResult'][0]['OrderList']
 
-        // Create order object
-        var orders = []
-
-        // Iterate through each order
-        for (order of ordersListRecent) {
-
-            // Create object for current order
-            
-
-            // Get order info
-            byDesign.getOrderInfoV2('', order.OrderID, function(orderInfo) {
-                orderInfo = orderInfo['soap:Envelope']['soap:Body'][0]['GetOrderInfo_V2Response'][0]['GetOrderInfo_V2Result'][0]
-
-                // Get order details info
-                byDesign.getOrderDetailsInfoV2('', order.OrderID, function(orderDetailsInfo) {
-                    orderDetailsInfo = orderDetailsInfo['soap:Envelope']['soap:Body'][0]['GetOrderDetailsInfo_V2Response'][0]['GetOrderDetailsInfo_V2Result'][0]['OrderDetailsResponse'][0]['OrderDetailsResponseV2']
-
-                    // Array to hold details
-                    var orderDetailsInfoArray = []
-
-                    // Iterate through each order detail
-                    for (detailInfo of orderDetailsInfo) {
-                        var detailInfoObject = {
-                            partyId: detailInfo.PartyID,
-                            orderDetailId: detailInfo.OrderDetailID,
-                            productId: detailInfo.ProductID,
-                            description: detailInfo.Description,
-                            quantity: detailInfo.Quantity,
-                            price: detailInfo.Price,
-                            volume: detailInfo.Volume,
-                            tax: detailInfo.Tax,
-                            taxableAmount: detailInfo.TaxableAmount,
-                            groupOwner: detailInfo.GroupOwner,
-                            parentOrderDetailId: detailInfo.ParentOrderDetailID,
-                            warehouseName: detailInfo.WarehouseName,
-                            warehouseEmail: detailInfo.WarehouseEmail,
-                            warehousePackSlipLine1: detailInfo.WarehousePackSlipLine1,
-                            warehousePackSlipLine2: detailInfo.WarehousePackSlipLine2,
-                            warehousePackSlipLine3: detailInfo.WarehousePackSlipLine3,
-                            warehousePackSlipLine4: detailInfo.WarehousePackSlipLine4,
-                            warehousePackSlipLine5: detailInfo.WarehousePackSlipLine5,
-                            warehousePackSlipLine6: detailInfo.WarehousePackSlipLine6,
-                            warehousePickupLocation: detailInfo.WarehousePickupLocation,
-                            warehouseCompanyTaxId: detailInfo.WarehouseCompanyTaxID,
-                            warehouseIntlCompanyName: detailInfo.WarehouseIntlCompanyName,
-                            warehousePackSlipTaxTitle: detailInfo.WarehousePackSlipTaxTitle,
-                            warehousePackSlipTaxPercentage: detailInfo.WarehousePackSlipTaxPercentage,
-                            packSlipProcessId: detailInfo.PackSlipProcessID,
-                            volume2: detailInfo.Volume2,
-                            volume3: detailInfo.Volume3,
-                            volume4: detailInfo.Volume4,
-                            otherPrice1: detailInfo.OtherPrice1,
-                            otherPrice2: detailInfo.OtherPrice2,
-                            otherPrice3: detailInfo.OtherPrice3,
-                            otherPrice4: detailInfo.OtherPrice4,
-                            packSlipProductId: detailInfo.PackSlipProductID,
-                            packSlipBarcode: detailInfo.PackSlipBarcode
-                        }
-
-                        // Push object to array
-                        orderDetailsInfoArray.push(detailInfoObject)
-                    }
-
-                    // Create a current order object
-                    var currentOrder = {
-                        orderId: order.OrderID, 
-                        dateCreated: order.CreatedDate,
-                        dateModified: order.LastModifiedDate,
-                        orderInfo: {
-                            repNumber: orderInfo.RepNumber,
-                            customerNumber: orderInfo.CustomerNumber,
-                            status: orderInfo.Status,
-                            orderDate: orderInfo.OrderDate,
-                            billName1: orderInfo.BillName1,
-                            billName2: orderInfo.BillName1,
-                            billStreet1: orderInfo.BillStreet1,
-                            billStreet2: orderInfo.BillStreet1,
-                            billCity: orderInfo.BillCity,
-                            billState: orderInfo.BillState,
-                            billPostalCode: orderInfo.BillPostalCode,
-                            billCountry: orderInfo.BillCountry,
-                            billEmail: orderInfo.BillEmail,
-                            billPhone: orderInfo.BillPhone,
-                            shipName1: orderInfo.ShipName1,
-                            shipName2: orderInfo.ShipName2,
-                            shipStreet1: orderInfo.ShipStreet1,
-                            shipStreet2: orderInfo.ShipStreet2,
-                            shipCity: orderInfo.ShipCity,
-                            shipState: orderInfo.ShipState,
-                            shipPostalCode: orderInfo.ShipPostalCode,
-                            shipGeoCode: orderInfo.ShipGeoCode,
-                            shipCountry: orderInfo.ShipCountry,
-                            shipEmail: orderInfo.ShipEmail,
-                            shipPhone: orderInfo.ShipPhone,
-                            invoiceNotes: orderInfo.InvoiceNotes,
-                            shipMethodId: orderInfo.ShipMethodID,
-                            shipMethod: orderInfo.ShipMethod,
-                            rankPriceType: orderInfo.RankPriceType,
-                            partyId: orderInfo.PartyID,
-                            currencyTypeId: orderInfo.CurrencyTypeID,
-                            giftOrder: orderInfo.GiftOrder,
-                            alternateShipMethodId: orderInfo.AlternateShipMethodID
-                        },
-                        orderDetailsInfo: orderDetailsInfoArray
-                    }
-
-                    // Add order to orders array    
-                    orders += currentOrder
-                })
-            })
+// Get order info
+var orderInfoPromise = new Promise(function(resolve, reject) {
+    byDesign.getOrderInfoV2('', '144242', function(orderInfo) {
+        orderInfo = orderInfo['soap:Envelope']['soap:Body'][0]['GetOrderInfo_V2Response'][0]['GetOrderInfo_V2Result'][0]
+    
+        // Create a current order object
+        var currentOrderInfo = {
+            repNumber: orderInfo.RepNumber[0],
+            customerNumber: orderInfo.CustomerNumber[0],
+            status: orderInfo.Status[0],
+            orderDate: orderInfo.OrderDate[0],
+            billName1: orderInfo.BillName1[0],
+            billName2: orderInfo.BillName1[0],
+            billStreet1: orderInfo.BillStreet1[0],
+            billStreet2: orderInfo.BillStreet1[0],
+            billCity: orderInfo.BillCity[0],
+            billState: orderInfo.BillState[0],
+            billPostalCode: orderInfo.BillPostalCode[0],
+            billCountry: orderInfo.BillCountry[0],
+            billEmail: orderInfo.BillEmail[0],
+            billPhone: orderInfo.BillPhone[0],
+            shipName1: orderInfo.ShipName1[0],
+            shipName2: orderInfo.ShipName2[0],
+            shipStreet1: orderInfo.ShipStreet1[0],
+            shipStreet2: orderInfo.ShipStreet2[0],
+            shipCity: orderInfo.ShipCity[0],
+            shipState: orderInfo.ShipState[0],
+            shipPostalCode: orderInfo.ShipPostalCode[0],
+            shipGeoCode: orderInfo.ShipGeoCode[0],
+            shipCountry: orderInfo.ShipCountry[0],
+            shipEmail: orderInfo.ShipEmail[0],
+            shipPhone: orderInfo.ShipPhone[0],
+            invoiceNotes: orderInfo.InvoiceNotes[0],
+            shipMethodId: orderInfo.ShipMethodID[0],
+            shipMethod: orderInfo.ShipMethod[0],
+            rankPriceType: orderInfo.RankPriceType[0],
+            partyId: orderInfo.PartyID[0],
+            currencyTypeId: orderInfo.CurrencyTypeID[0],
+            giftOrder: orderInfo.GiftOrder[0],
+            alternateShipMethodId: orderInfo.AlternateShipMethodID[0]
         }
+
+        // Resolve promise with orderInfo
+        resolve(orderInfo)
     })
-}
+})
+
+// Get order details info
+var orderDetailsInfoPromise = new Promise(function(resolve, reject) {
+    byDesign.getOrderDetailsInfoV2('', '144242', function(orderDetailsInfo) {
+        orderDetailsInfo = orderDetailsInfo['soap:Envelope']['soap:Body'][0]['GetOrderDetailsInfo_V2Response'][0]['GetOrderDetailsInfo_V2Result'][0]['OrderDetailsResponse'][0]['OrderDetailsResponseV2']
+    
+        // Array to hold details
+        var orderDetailsInfoArray = []
+    
+        // Iterate through each order detail
+        for (detailInfo of orderDetailsInfo) {
+            var detailInfoObject = {
+                partyId: detailInfo.PartyID[0],
+                orderDetailId: detailInfo.OrderDetailID[0],
+                productId: detailInfo.ProductID[0],
+                description: detailInfo.Description[0],
+                quantity: detailInfo.Quantity[0],
+                price: detailInfo.Price[0],
+                volume: detailInfo.Volume[0],
+                tax: detailInfo.Tax[0],
+                taxableAmount: detailInfo.TaxableAmount[0],
+                groupOwner: detailInfo.GroupOwner[0],
+                parentOrderDetailId: detailInfo.ParentOrderDetailID[0],
+                warehouseName: detailInfo.WarehouseName[0],
+                warehouseEmail: detailInfo.WarehouseEmail[0],
+                warehousePackSlipLine1: detailInfo.WarehousePackSlipLine1[0],
+                warehousePackSlipLine2: detailInfo.WarehousePackSlipLine2[0],
+                warehousePackSlipLine3: detailInfo.WarehousePackSlipLine3[0],
+                warehousePackSlipLine4: detailInfo.WarehousePackSlipLine4[0],
+                warehousePackSlipLine5: detailInfo.WarehousePackSlipLine5[0],
+                warehousePackSlipLine6: detailInfo.WarehousePackSlipLine6[0],
+                warehousePickupLocation: detailInfo.WarehousePickupLocation[0],
+                warehouseCompanyTaxId: detailInfo.WarehouseCompanyTaxID[0],
+                warehouseIntlCompanyName: detailInfo.WarehouseIntlCompanyName[0],
+                warehousePackSlipTaxTitle: detailInfo.WarehousePackSlipTaxTitle[0],
+                warehousePackSlipTaxPercentage: detailInfo.WarehousePackSlipTaxPercentage[0],
+                packSlipProcessId: detailInfo.PackSlipProcessID[0],
+                volume2: detailInfo.Volume2[0],
+                volume3: detailInfo.Volume3[0],
+                volume4: detailInfo.Volume4[0],
+                otherPrice1: detailInfo.OtherPrice1[0],
+                otherPrice2: detailInfo.OtherPrice2[0],
+                otherPrice3: detailInfo.OtherPrice3[0],
+                otherPrice4: detailInfo.OtherPrice4[0],
+                packSlipProductId: detailInfo.PackSlipProductID[0],
+                packSlipBarcode: detailInfo.PackSlipBarcode[0]
+            }
+
+            // Add object to array
+            orderDetailsInfoArray.push(detailInfoObject)
+        }
+
+        // Resolve promise with orderDetailsInfoArray
+        resolve(orderDetailsInfoArray)
+    })
+})
+
+// orderId: order.OrderID, 
+// dateCreated: order.CreatedDate,
+// dateModified: order.LastModifiedDate,
+
+Promise.all([orderInfoPromise, orderDetailsInfoPromise]).then(function(results) {
+
+    // Create order object
+    var order = {
+        orderId: '.OrderID', 
+        dateCreated: '.CreatedDate',
+        dateModified: '.LastModifiedDate',
+    }
+
+    // Add data from promises to order object
+    order.orderInfo = results[0]
+    order.orderDetails = results[1]
+
+    // Debug
+    console.log(order)
+})
