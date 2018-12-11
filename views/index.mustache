@@ -15,35 +15,153 @@
                 height: 100%;
             }
 
-            .order {
+            .row {
                 width: 100%;
-                height: 30px;
-
-                display: block;
-
-                background-color: lightgray;
-                border-bottom: 1px solid black;
             }
 
-            .order .order_info {
+            .row .row-header {
+                width: 100%;
+
+                padding-left: 10px;
+                line-height: 30px;
+
+                border-bottom: 1px solid #2980b9;
+                background-color: #3498db;
+            }
+
+            .row .row-body {
+                padding-left: 30px;
+            }
+
+            .row.collapsed .row-body {
                 display: none;
             }
+
         </style>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     </head>
 
     <body>
-        {{#orders}}
-            <div class="order">
-                <table>
-                    <tr>
-                        <td>Order ID: {{orderId}}</td>
-                        <td>Date Created: {{dateCreated}}</td>
-                        <td>Date Modified: {{dateModified}}</td>
-                    </tr>
-                </table>
+        <div class="orders">
+        {{ #orders }}
+            <div class="row collapsed">
+                <div class="row-header">
+                    <p>Order ID: {{ orderId }}</p>
+                </div>
 
-                <div class="order_info"></div>
+                <div class="row-body"> 
+                    {{ #orderInfo }}
+                    <div class="row collapsed">
+                        <div class="row-header">
+                            <p>Order Info</p>
+                        </div>
+
+                        <div class="row-body">
+                            <div class="row collapsed">
+                                <div class="row-header">
+                                    <p>Rep Number: {{ repNumber }}</p>
+                                    <p>Customer Number: {{ customerNumber }}</p>
+                                    <p>Status: {{ status }}</p>
+                                    <p>Order Date: {{ orderDate }}</p>
+                                    <p>Bill Name 1: {{ billName1 }}</p>
+                                    <p>Bill Name 2: {{ billName2 }}</p>
+                                    <p>Bill Street 1: {{ billStreet1 }}</p>
+                                    <p>Bill Street 2: {{ billStreet2 }}</p>
+                                    <p>Bill City: {{ billCity }}</p>
+                                    <p>Bill State: {{ billState }}</p>
+                                    <p>Bill Postal Code: {{ billPostalCode }}</p>
+                                    <p>Bill Country: {{ billCountry }}</p>
+                                    <p>Bill Email: {{ billEmail }}</p>
+                                    <p>Bill Phone: {{ billPhone }}</p>
+                                    <p>Ship Name 1: {{ shipName1 }}</p>
+                                    <p>Ship Name 2: {{ shipName2 }}</p>
+                                    <p>Ship Street 1: {{ shipStreet1 }}</p>
+                                    <p>Ship Street 2: {{ shipStreet2 }}</p>
+                                    <p>Ship City: {{ shipCity }}</p>
+                                    <p>Ship State: {{ shipState }}</p>
+                                    <p>Ship Postal Code: {{ shipPostalCode }}</p>
+                                    <p>Ship Geo Code: {{ shipGeoCode }}</p>
+                                    <p>Ship Country: {{ shipCountry }}</p>
+                                    <p>Ship Email: {{ shipEmail }}</p>
+                                    <p>Ship Phone: {{ shipPhone }}</p>
+                                    <p>Invoice Notes: {{ invoiceNotes }}</p>
+                                    <p>Ship Method ID: {{ shipMethodId }}</p>
+                                    <p>Ship Method: {{ shipMethod }}</p>
+                                    <p>Rank Price Type: {{ rankPriceType }}</p>
+                                    <p>Party ID: {{ partyId }}</p>
+                                    <p>Currency Type ID: {{ currencyTypeId }}</p>
+                                    <p>Gift Order: {{ giftOrder }}</p>
+                                    <p>Alternate Ship Method ID: {{ alternateShipMethodId }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ /orderInfo }}
+                    
+
+                    {{ #orderDetails }}
+                    <div class="row collapsed">
+                        <div class="row-header">
+                            <p>Order Detail</p>
+                        </div>
+
+                        <div class="row-body">
+                            <div class="row collapsed">
+                                <div class="row-header">
+                                    <p>Party ID: {{ partyId }}</p>
+                                    <p>Order Detail ID: {{ orderDetailId }}</p>
+                                    <p>Product ID: {{ productId }}</p>
+                                    <p>Description: {{ description }}</p>
+                                    <p>Quantity: {{ quantity }}</p>
+                                    <p>Price: {{ price }}</p>
+                                    <p>Volume: {{ volume }}</p>
+                                    <p>Tax: {{ tax }}</p>
+                                    <p>Taxable Amount: {{ taxableAmount }}</p>
+                                    <p>Group Owner: {{ groupOwner }}</p>
+                                    <p>Parent Order Detail ID: {{ parentOrderDetailId }}</p>
+                                    <p>Warehouse Name: {{ warehouseName }}</p>
+                                    <p>Warehouse Email: {{ warehouseEmail }}</p>
+                                    <p>Warehouse Pack Slip Line 1: {{ warehousePackSlipLine1 }}</p>
+                                    <p>Warehouse Pack Slip Line 2: {{ warehousePackSlipLine2 }}</p>
+                                    <p>Warehouse Pack Slip Line 3: {{ warehousePackSlipLine3 }}</p>
+                                    <p>Warehouse Pack Slip Line 4: {{ warehousePackSlipLine4 }}</p>
+                                    <p>Warehouse Pack Slip Line 5: {{ warehousePackSlipLine5 }}</p>
+                                    <p>Warehouse Pack Slip Line 6: {{ warehousePackSlipLine6 }}</p>
+                                    <p>Warehouse Pickup Location: {{ warehousePickupLocation }}</p>
+                                    <p>Warehouse Company Tax ID: {{ warehouseCompanyTaxId }}</p>
+                                    <p>Warehouse Company Name: {{ warehouseIntlCompanyName }}</p>
+                                    <p>Warehouse Pack Slip Tax Title: {{ warehousePackSlipTaxTitle }}</p>
+                                    <p>Warehouse Pack Slip Tax Percentage: {{ warehousePackSlipTaxPercentage }}</p>
+                                    <p>Pack Slip Process ID: {{ packSlipProcessId }}</p>
+                                    <p>Volume 2: {{ volume2 }}</p>
+                                    <p>Volume 3: {{ volume3 }}</p>
+                                    <p>Volume 4: {{ volume4 }}</p>
+                                    <p>Other Price 1: {{ otherPrice1 }}</p>
+                                    <p>Other Price 2: {{ otherPrice2 }}</p>
+                                    <p>Other Price 3: {{ otherPrice3 }}</p>
+                                    <p>Other Price 4: {{ otherPrice4 }}</p>
+                                    <p>Pack Slip Product ID: {{ packSlipProductId }}</p>
+                                    <p>Pack Slip Barcode: {{ packSlipBarcode }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ /orderDetails }}
+                </div>
             </div>
-        {{/orders}}
+        {{ /orders }}
+        </div>
+
+        <script>
+            $('.row .row-header').click(function() {
+                if ($(this).parent().hasClass('collapsed')) {
+                    $(this).parent().removeClass('collapsed')
+                }
+                else {
+                    $(this).parent().addClass('collapsed')
+                }
+            })
+        </script>
     </body>
 </html>
