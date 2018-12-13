@@ -1,8 +1,12 @@
 const axios = require('axios');
 const apikey = "ruUybh4YrtotyG6jo6rQZky3ir5ME8Au";
 
+//consuming order variables from server.js 
+//var sourceFile = require('./var.js');
+//console.log(sourceFile.variableName);
+
 // defining parcel dimension variables
-var frompostcode = '2000';
+var frompostcode = '2634';
 var topostcode = '3000';
 var parcel_length = '22';
 var parcel_width = '16';
@@ -75,4 +79,5 @@ async function get_price() {
     })
   }
 
+  get_price()
 
