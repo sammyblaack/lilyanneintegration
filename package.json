@@ -5,9 +5,11 @@
   "main": "server.js",
   "dependencies": {
     "axios": "^0.18.0",
+    "bluebird": "^3.5.3",
     "express": "^4.16.4",
     "express-mustache": "^1.0.4",
     "imap": "^0.8.19",
+    "mailparser": "^2.4.3",
     "mongoose": "^5.3.16",
     "mustache-express": "^1.2.8",
     "xero-node": "^3.0.14",

@@ -1,25 +1,4 @@
 const XeroClient = require('xero-node').AccountingAPIClient;
-//const mongoose = require('mongoose');
-//var Schema = mongoose.Schema;
-
- /*
-sample only
-https://mongoosejs.com/docs/guide.html
-
-var blogSchema = new Schema({
-  title:  String,
-  author: String,
-  body:   String,
-  comments: [{ body: String, date: Date }],
-  date: { type: Date, default: Date.now },
-  hidden: Boolean,
-  meta: {
-    votes: Number,
-    favs:  Number
-  }
-});
-*/
-
 
 
 // Config Stuff for authenticating with Xero Account

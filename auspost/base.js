@@ -1,23 +1,6 @@
 const axios = require('axios');
 const apikey = "ruUybh4YrtotyG6jo6rQZky3ir5ME8Au";
-const mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
-
-//sample only
-// https://mongoosejs.com/docs/guide.html
-var blogSchema = new Schema({
-  title:  String,
-  author: String,
-  body:   String,
-  comments: [{ body: String, date: Date }],
-  date: { type: Date, default: Date.now },
-  hidden: Boolean,
-  meta: {
-    votes: Number,
-    favs:  Number
-  }
-});
 
 // defining parcel dimension variables
 var frompostcode = '2634';
