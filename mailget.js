@@ -1,8 +1,10 @@
 var Imap = require("imap");
 var MailParser = require("mailparser").MailParser;
 var Promise = require("bluebird");
+const fs = require('fs');
 Promise.longStackTraces();
 
+//mailbox config
 var imapConfig = {
     user: 'mailtrap',
     password: 'beginnings01',
@@ -29,14 +31,15 @@ function execute() {
         }
         imap.search(["UNSEEN"], function(err, results) {
             if(!results || !results.length){console.log("No unread mails");imap.end();return;}
-            /* mark as seen
+
+             //mark as seen
             imap.setFlags(results, ['\\Seen'], function(err) {
                 if (!err) {
                     console.log("marked as read");
                 } else {
                     console.log(JSON.stringify(err, null, 2));
                 }
-            });*/
+            });
 
             var f = imap.fetch(results, { bodies: "" });
             f.on("message", processMessage);
@@ -66,6 +69,14 @@ function processMessage(msg, seqno) {
             console.log(seqno);
             console.log(data.text);  /* data.html*/
         }
+// write to a new file named 2pac.txt
+fs.writeFile('2pac.json', data.text, (err) => {  
+    // throws an error, you could also catch it here
+    if (err) throw err;
+
+    // success case, the file was saved
+    console.log('Printed array to file');
+});
 
         // if (data.type === 'attachment') {
         //     console.log(data.filename);

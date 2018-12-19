@@ -8,6 +8,7 @@
     "bluebird": "^3.5.3",
     "express": "^4.16.4",
     "express-mustache": "^1.0.4",
+    "fs": "0.0.1-security",
     "imap": "^0.8.19",
     "mailparser": "^2.4.3",
     "mongoose": "^5.3.16",

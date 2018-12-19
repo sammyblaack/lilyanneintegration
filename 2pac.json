@@ -1,0 +1,76 @@
+{
+
+"customerNum": "1593791",
+
+"customerName": "Elizabeth",
+
+"orderNum": "144326",
+
+"orderDate": "17/12/2018",
+
+"products": "{PRODUCTS}",
+
+"orderTotal": "{ORDERTOTAL}",
+
+"repName": "{REPNAME}",
+
+"repEmail": "{REPEMAIL}",
+
+"shipAddress": "{SHIPADDRESS}",
+
+"billAddress": "{BILLADDRESS}",
+
+"paymentType": "{PAYMENTTYPE}",
+
+"companyName": "{COMPANYNAME}",
+
+"salesTax": "{SALESTAX}",
+
+"shippingHandling": "{SHIPPING/HANDLING}",
+
+"repPhone": "{REPPHONE}",
+
+"repNum": "{REPNUM}",
+
+"subTotal": "{SUBTOTAL}",
+
+"custEmail": "{CUSTEMAIL}",
+
+"payments": "{PAYMENTS}",
+
+"partyDate": "{PARTYDATE}",
+
+"partyId": "{PARTYID}",
+
+"partyHostName": "{PARTYHOSTNAME}",
+
+"partyName": "{PARTYNAME}",
+
+"partyLocation": "{PARTYLOCATION}",
+
+"partyBillName": "{PARTYBILLNAME}",
+
+"partyShipName": "{PARTYSHIPNAME}",
+
+"partyOrderLineDiscount": "{PARTYORDERLINEDISCOUNT}",
+
+"partyOrderLineShippingMethod": "{PARTYORDERLINESHIPPINGMETHOD}",
+
+"orderLinePriceExtended": "{ORDERLINEPRICEEXTENDED}",
+
+"orderLineVolume1": "{ORDERLINEVOLUME1}",
+
+"orderLineVolume2": "{ORDERLINEVOLUME2}",
+
+"orderLineVolume3": "{ORDERLINEVOLUME3}",
+
+"orderLineVolume4": "{ORDERLINEVOLUME4}",
+
+"orderLineVolume1Extended": "{ORDERLINEVOLUME1EXTENDED}",
+
+"orderLineVolume2Extended": "{ORDERLINEVOLUME2EXTENDED}",
+
+"orderLineVolume3Extended": "{ORDERLINEVOLUME3EXTENDED}",
+
+"orderLineVolume4Extended": "{ORDERLINEVOLUME4EXTENDED}"
+}
