@@ -7,10 +7,14 @@
 
 // Modules
 var byDesign = require('./modules/bydesign')
-
+const fs = require('fs');
 var express = require('express')
 var app = express()
 var mustacheExpress = require('mustache-express')
+
+//pulling data from 2pac
+let rawdata = fs.readFileSync('2pac.json');  
+let stuff = JSON.parse(rawdata);
 
 // Express engine setup
 app.engine('mustache', mustacheExpress())
@@ -19,7 +23,7 @@ app.set('views', __dirname + '/views')
 
 
 app.get('/', function(req, res) {
-    getOrderInfo('144242', function(order) {
+    getOrderInfo(stuff.orderNum, function(order) {
         res.render('index', {orders: [order]})
     })  
 })
@@ -149,4 +153,13 @@ function getOrderInfo(orderId, callback) {
         // Return order through callback
         callback(order)
     })
+    //Write order info to file 
+    /*
+    fs.writeFile('biggie.json', orderDetailsInfoArray.text, (err) => {  
+        // throws an error, you could also catch it here
+        if (err) throw err;
+    
+        // success case, the file was saved
+        console.log('Printed array to file');
+    }); */
 }

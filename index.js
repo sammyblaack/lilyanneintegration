@@ -11,7 +11,7 @@ const config = {
 let rawdata = fs.readFileSync('2pac.json');  
 let stuff = JSON.parse(rawdata);  
 
-//reading invoice details from server
+//reading invoice details from biggie
 
 
   (async function(){

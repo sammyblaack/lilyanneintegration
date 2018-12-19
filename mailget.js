@@ -69,7 +69,7 @@ function processMessage(msg, seqno) {
             console.log(seqno);
             console.log(data.text);  /* data.html*/
         }
-// write to a new file named 2pac.txt
+// write to a new file named 2pac.json
 fs.writeFile('2pac.json', data.text, (err) => {  
     // throws an error, you could also catch it here
     if (err) throw err;
