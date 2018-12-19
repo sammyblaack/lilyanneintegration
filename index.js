@@ -1,9 +1,10 @@
 const XeroClient = require('xero-node').AccountingAPIClient;
-const mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+//const mongoose = require('mongoose');
+//var Schema = mongoose.Schema;
 
-//sample only
-// https://mongoosejs.com/docs/guide.html
+ /*
+sample only
+https://mongoosejs.com/docs/guide.html
 
 var blogSchema = new Schema({
   title:  String,
@@ -17,7 +18,7 @@ var blogSchema = new Schema({
     favs:  Number
   }
 });
-
+*/
 
 
 
@@ -58,3 +59,8 @@ const config = {
 
 
   })();
+
+ 
+
+
+
